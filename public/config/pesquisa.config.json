@@ -1,0 +1,23 @@
+{
+ "app": {
+  "terminal": "1",
+  "tipoavaliacao": "1",
+  "ativarjanelaconfirma": "1",
+  "checaratualizacao": "5",
+  "listadeservicos": [
+   "Atendimento"
+  ],
+  "evaluetion": {
+   "pessimo": "CmdOrCtrl+Shift+1",
+   "ruim": "CmdOrCtrl+Shift+2",
+   "regular": "CmdOrCtrl+Shift+3",
+   "bom": "CmdOrCtrl+Shift+4",
+   "otimo": "CmdOrCtrl+Shift+5"
+  }
+ },
+ "server": {
+  "host": "https://dashboard.cleversystems.net/",
+  "user": "thayllan.siqueira@cleversystems.com.br",
+  "pass": "Thay@666"
+ }
+}
