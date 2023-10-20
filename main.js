@@ -2,6 +2,7 @@ const {
 	app,
 	BrowserWindow,
 	ipcMain,
+	dialog,
 } = require("electron");
 const {
 	autoUpdater,
@@ -49,6 +50,10 @@ ipcMain.on("app_version", (event) => {
 });
 
 autoUpdater.on("update-available", () => {
+	dialog.showMenssageBox({
+		title: "teste",
+		message: "trouxa",
+	});
 	mainWindow.webContents.send("update_available");
 });
 
