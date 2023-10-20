@@ -1,6 +1,6 @@
 {
 	"name": "pesquisa",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "sistema",
 	"main": "main.js",
 	"scripts": {
@@ -40,9 +40,15 @@
 			"uninstallerIcon": "infra/images/icon.ico",
 			"uninstallDisplayName": "pesquisa",
 			"oneClick": false,
-			"allowToChangeInstallationDirectory": false,
-			"include": "installer.nsh"
-		}
+			"allowToChangeInstallationDirectory": false
+		},
+		"publish": [
+			{
+				"provider": "github",
+				"owner": "CleverSystemsLTDA",
+				"repo": "pesquisa-installer"
+			}
+		]
 	},
 	"repository": {
 		"type": "git",
