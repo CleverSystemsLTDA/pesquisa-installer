@@ -1,40 +1,53 @@
 const {
 	app,
-	BrowserWindow,
+	// BrowserWindow,
 	ipcMain,
 } = require("electron");
 const {
 	autoUpdater,
 } = require("electron-updater");
+const { resolve, join } = require("path");
 
 let mainWindow;
 
 if (process.env.NODE_ENV === "development") {
 	autoUpdater.autoDownload = false;
 	autoUpdater.autoInstallOnAppQuit = false;
-	autoUpdater.checkForUpdates();
+	setInterval(() => {
+		autoUpdater.checkForUpdates();
+	}, 30000);
 }
+
+const path = join(
+	process.resourcesPath,
+	"pesquisa.exe"
+);
 
 function createWindow() {
-	mainWindow = new BrowserWindow({
-		width: 800,
-		height: 600,
-		webPreferences: {
-			nodeIntegration: true,
-		},
-	});
-	mainWindow.loadFile("index.html");
-	mainWindow.on("closed", function () {
-		mainWindow = null;
+	// mainWindow = new BrowserWindow({
+	// 	width: 800,
+	// 	height: 600,
+	// 	webPreferences: {
+	// 		nodeIntegration: true,
+	// 	},
+	// });
+	// mainWindow.loadFile("index.html");
+	// mainWindow.on("closed", function () {
+	// 	mainWindow = null;
+	// });
+	app.whenReady().then(() => {
+		shell.openPath(resolve(path));
 	});
 	mainWindow.once("ready-to-show", () => {
-		autoUpdater.checkForUpdatesAndNotify();
+		setInterval(() => {
+			autoUpdater.checkForUpdatesAndNotify();
+		}, 30000);
 	});
 }
 
-app.on("ready", () => {
-	createWindow();
-});
+// app.on("ready", () => {
+// 	createWindow();
+// });
 
 app.on("window-all-closed", function () {
 	if (process.platform !== "darwin") {

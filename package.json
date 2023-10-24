@@ -1,8 +1,8 @@
 {
 	"name": "installer",
-	"version": "0.1.0",
-	"description": "sistema de atualizacao",
-	"main": "main.js",
+	"version": "0.2.0",
+	"description": "Sistema_De_Atualizacao",
+	"main": "src/main.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/CleverSystemsLTDA/pesquisa-installer.git"
@@ -10,11 +10,51 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron .",
+		"electron": "electron .",
 		"build": "electron-builder build --win --publish never",
-		"deploy": "electron-builder build --win --publish always"
+		"deploy": "electron-builder build --win --publish always",
+		"dist": "npm run build & electron-builder build --win --publish always"
 	},
+	"build": {
+		"appId": "com.pesquisa-installer.ElectronAutoUpdate",
+		"buildDependenciesFromSource": true,
+		"productName": "pesquisa",
+		"asar": true,
+		"files": [],
+		"extraResources": {
+			"from": "public/",
+			"to": ".",
+			"filter": [
+				"!main.js"
+			]
+		},
+		"win": {
+			"artifactName": "${productName}.${ext}",
+			"target": [
+				{
+					"target": "nsis",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				}
+			],
+			"icon": "infra/images/icon.ico"
+		},
+		"nsis": {
+			"installerIcon": "infra/images/icon.ico",
+			"uninstallerIcon": "infra/images/icon.ico",
+			"uninstallDisplayName": "${productName}",
+			"oneClick": false,
+			"allowToChangeInstallationDirectory": false
+		}
+	},
+	"keywords": [],
 	"author": "CleverSystemsLTDA",
 	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/CleverSystemsLTDA/pesquisa-installer/issues"
+	},
 	"devDependencies": {
 		"electron": "^27.0.2",
 		"electron-builder": "^24.6.4"
