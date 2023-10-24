@@ -1,6 +1,6 @@
 {
 	"name": "installer",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"description": "sistema de atualizacao",
 	"main": "main.js",
 	"repository": {
