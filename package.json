@@ -1,6 +1,6 @@
 {
 	"name": "installer",
-	"version": "0.4.0",
+	"version": "0.3.0",
 	"description": "Sistema_De_Atualizacao",
 	"main": "public/main.js",
 	"repository": {
@@ -14,13 +14,6 @@
 		"dist": "npm run build & electron-builder build --win --publish always"
 	},
 	"build": {
-		"publish": [
-			{
-				"provider": "github",
-				"owner": "CleverSystemsLTDA",
-				"repo": "pesquisa-installe"
-			}
-		],
 		"appId": "com.pesquisa-installer.ElectronAutoUpdate",
 		"buildDependenciesFromSource": true,
 		"productName": "pesquisa",
