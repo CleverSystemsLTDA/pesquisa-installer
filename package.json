@@ -2,7 +2,7 @@
 	"name": "installer",
 	"version": "0.0.1",
 	"description": "sistema de atualizacao",
-	"main": "src/main.js",
+	"main": "main.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/CleverSystemsLTDA/pesquisa-installer.git"
