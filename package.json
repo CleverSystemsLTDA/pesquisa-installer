@@ -1,7 +1,7 @@
 {
 	"name": "installer",
-	"version": "0.4.0",
-	"description": "Sistema_De_Atualizacao",
+	"version": "0.5.0",
+	"description": "Sistema_de_Atualizacao",
 	"main": "public/main.js",
 	"repository": {
 		"type": "git",
@@ -42,6 +42,7 @@
 		"nsis": {
 			"installerIcon": "infra/images/icon.ico",
 			"uninstallerIcon": "infra/images/icon.ico",
+			"uninstallerDisplayName": "${productName}",
 			"oneClick": false,
 			"allowToChangeInstallationDirectory": false
 		}
