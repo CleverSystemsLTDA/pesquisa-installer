@@ -2,7 +2,7 @@
 	"name": "installer",
 	"version": "0.2.0",
 	"description": "Sistema_De_Atualizacao",
-	"main": "src/main.js",
+	"main": "public/main.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/CleverSystemsLTDA/pesquisa-installer.git"
@@ -10,9 +10,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron .",
-		"electron": "electron .",
-		"build": "electron-builder build --win --publish never",
-		"deploy": "electron-builder build --win --publish always",
+		"build": "sucrase ./src -d ./public --transforms imports",
 		"dist": "npm run build & electron-builder build --win --publish always"
 	},
 	"build": {
@@ -44,7 +42,7 @@
 		"nsis": {
 			"installerIcon": "infra/images/icon.ico",
 			"uninstallerIcon": "infra/images/icon.ico",
-			"uninstallDisplayName": "${productName}",
+			"uninstallDisplayName": "pesquisa",
 			"oneClick": false,
 			"allowToChangeInstallationDirectory": false
 		}
@@ -61,6 +59,8 @@
 	},
 	"dependencies": {
 		"dotenv": "^16.3.1",
-		"electron-updater": "^6.1.4"
+		"electron-updater": "^6.1.4",
+		"eslint": "^8.52.0",
+		"sucrase": "^3.34.0"
 	}
 }
