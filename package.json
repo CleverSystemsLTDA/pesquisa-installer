@@ -1,69 +1,26 @@
 {
-  "name": "pesquisa",
-  "version": "0.0.1",
-  "description": "Sistema",
-  "main": "public/main.js",
-  "scripts": {
-    "dev": "nodemon src/server.js",
-    "build": "sucrase ./src -d ./public --transforms imports",
-    "start": "node public/server.js",
-    "electron": "electron .",
-    "dist": "npm run build & electron-builder"
-  },
-  "build": {
-    "appId": "pesquisa",
-    "buildDependenciesFromSource": true,
-    "productName": "pesquisa",
-    "asar": true,
-    "files": [],
-    "extraResources": {
-      "from": "public/",
-      "to": ".",
-      "filter": [
-        "!main.js"
-      ]
-    },
-    "win": {
-      "artifactName": "${productName}.${ext}",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ],
-      "icon": "infra/images/icon.ico"
-    },
-    "nsis": {
-      "installerIcon": "infra/images/icon.ico",
-      "uninstallerIcon": "infra/images/icon.ico",
-      "uninstallDisplayName": "pesquisa",
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": false,
-      "include": "installer.nsh"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "keywords": [],
-  "author": "Cleversystems",
-  "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
-  "dependencies": {},
-  "devDependencies": {
-    "electron": "^16.2.8",
-    "electron-builder": "^23.3.3",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.24.0",
-    "nodemon": "^2.0.12",
-    "sucrase": "^3.20.0"
-  }
+	"name": "installer",
+	"version": "0.0.1",
+	"description": "sistema de atualizacao",
+	"main": "src/main.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/CleverSystemsLTDA/pesquisa-installer.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "electron .",
+		"build": "electron-builder build --win --publish never",
+		"deploy": "electron-builder build --win --publish always"
+	},
+	"author": "CleverSystemsLTDA",
+	"license": "ISC",
+	"devDependencies": {
+		"electron": "^27.0.2",
+		"electron-builder": "^24.6.4"
+	},
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"electron-updater": "^6.1.4"
+	}
 }

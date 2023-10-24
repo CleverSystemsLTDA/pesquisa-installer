@@ -2,3 +2,7 @@ node_modules/
 package-lock.json
 build/
 dist/
+.env
+
+dev-app-update.yml
+electron-builder.yml
