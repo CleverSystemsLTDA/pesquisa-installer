@@ -18,8 +18,7 @@
 			{
 				"provider": "github",
 				"owner": "CleverSystemsLTDA",
-				"repo": "pesquisa-installe",
-				"token": "GH_TOKEN=$GH_TOKEN"
+				"repo": "pesquisa-installe"
 			}
 		],
 		"appId": "com.pesquisa-installer.ElectronAutoUpdate",
