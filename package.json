@@ -1,6 +1,6 @@
 {
 	"name": "pesquisa",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"description": "SistemaDeAtualizacao",
 	"main": "public/main.js",
 	"repository": {
@@ -44,8 +44,7 @@
 			"uninstallerIcon": "infra/images/icon.ico",
 			"uninstallDisplayName": "pesquisa",
 			"oneClick": false,
-			"allowToChangeInstallationDirectory": false,
-			"include": "installer.nsh"
+			"allowToChangeInstallationDirectory": false
 		}
 	},
 	"keywords": [],
