@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "development") {
 	autoUpdater.autoInstallOnAppQuit = false;
 	setInterval(() => {
 		autoUpdater.checkForUpdates();
-	}, 30000);
+	}, 20000);
 }
 
 const path = join(
@@ -23,27 +23,27 @@ const path = join(
 	"pesquisa.exe"
 );
 
-function createWindow() {
-	// mainWindow = new BrowserWindow({
-	// 	width: 800,
-	// 	height: 600,
-	// 	webPreferences: {
-	// 		nodeIntegration: true,
-	// 	},
-	// });
-	// mainWindow.loadFile("index.html");
-	// mainWindow.on("closed", function () {
-	// 	mainWindow = null;
-	// });
-	app.whenReady().then(() => {
-		shell.openPath(resolve(path));
-	});
-	mainWindow.once("ready-to-show", () => {
-		setInterval(() => {
-			autoUpdater.checkForUpdatesAndNotify();
-		}, 30000);
-	});
-}
+// function createWindow() {
+// mainWindow = new BrowserWindow({
+// 	width: 800,
+// 	height: 600,
+// 	webPreferences: {
+// 		nodeIntegration: true,
+// 	},
+// });
+// mainWindow.loadFile("index.html");
+// mainWindow.on("closed", function () {
+// 	mainWindow = null;
+// });
+app.whenReady().then(() => {
+	shell.openPath(resolve(path));
+});
+mainWindow.once("ready-to-show", () => {
+	setInterval(() => {
+		autoUpdater.checkForUpdatesAndNotify();
+	}, 20000);
+});
+// }
 
 // app.on("ready", () => {
 // 	createWindow();
@@ -55,11 +55,11 @@ app.on("window-all-closed", function () {
 	}
 });
 
-app.on("activate", function () {
-	if (mainWindow === null) {
-		createWindow();
-	}
-});
+// app.on("activate", function () {
+// 	if (mainWindow === null) {
+// 		createWindow();
+// 	}
+// });
 
 ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {

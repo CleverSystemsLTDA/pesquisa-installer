@@ -1,7 +1,7 @@
 {
-	"name": "installer",
-	"version": "0.5.0",
-	"description": "Sistema_de_Atualizacao",
+	"name": "pesquisa",
+	"version": "0.6.0",
+	"description": "SistemaDeAtualizacao",
 	"main": "public/main.js",
 	"repository": {
 		"type": "git",
@@ -42,9 +42,10 @@
 		"nsis": {
 			"installerIcon": "infra/images/icon.ico",
 			"uninstallerIcon": "infra/images/icon.ico",
-			"uninstallerDisplayName": "${productName}",
+			"uninstallDisplayName": "pesquisa",
 			"oneClick": false,
-			"allowToChangeInstallationDirectory": false
+			"allowToChangeInstallationDirectory": false,
+			"include": "installer.nsh"
 		}
 	},
 	"keywords": [],
