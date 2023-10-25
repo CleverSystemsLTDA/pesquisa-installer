@@ -1,6 +1,8 @@
-"use strict";const {
+"use strict";
+const {
 	app,
 	// BrowserWindow,
+	shell,
 	ipcMain,
 } = require("electron");
 const {
@@ -23,33 +25,36 @@ const path = join(
 	"pesquisa.exe"
 );
 
-function createWindow() {
-	// mainWindow = new BrowserWindow({
-	// 	width: 800,
-	// 	height: 600,
-	// 	webPreferences: {
-	// 		nodeIntegration: true,
-	// 	},
-	// });
-	// mainWindow.loadFile("index.html");
-	// mainWindow.on("closed", function () {
-	// 	mainWindow = null;
-	// });
+// function createWindow() {
+// mainWindow = new BrowserWindow({
+// 	width: 800,
+// 	height: 600,
+// 	webPreferences: {
+// 		nodeIntegration: true,
+// 	},
+// });
+// mainWindow.loadFile("index.html");
+// mainWindow.on("closed", function () {
+// 	mainWindow = null;
+// });
 
-	/* app.whenReady().then(() => {
+/* app.whenReady().then(() => {
 		shell.openPath(resolve(path));
 	}); */
 
-	mainWindow.once("ready-to-show", () => {
-		setInterval(() => {
-			autoUpdater.checkForUpdatesAndNotify();
-		}, 20000);
-	});
-}
+// mainWindow.once("ready-to-show", () => {
+// 	setInterval(() => {
+// 		autoUpdater.checkForUpdatesAndNotify();
+// 	}, 20000);
+// });
+// }
 
 app.on("ready", () => {
 	shell.openPath(resolve(path));
-	createWindow();
+	setInterval(() => {
+		autoUpdater.checkForUpdatesAndNotify();
+	}, 20000);
+	// createWindow();
 });
 
 app.on("window-all-closed", function () {
