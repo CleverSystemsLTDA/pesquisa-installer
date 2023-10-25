@@ -42,9 +42,9 @@ const path = join(
 	}); */
 
 // mainWindow("ready-to-show", () => {
-setInterval(() => {
-	autoUpdater.checkForUpdatesAndNotify();
-}, 20000);
+// setInterval(() => {
+// 	autoUpdater.checkForUpdatesAndNotify();
+// }, 20000);
 // });
 // }
 
