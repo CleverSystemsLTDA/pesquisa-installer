@@ -37,9 +37,9 @@ function createWindow() {
 	});
 }
 
-mainWindow.on("closed", function () {
+/* mainWindow.on("closed", function () {
 	mainWindow = null;
-});
+}); */
 
 app.on("ready", () => {
 	shell.openPath(resolve(path));
