@@ -3,6 +3,7 @@
 	shell,
 	ipcMain,
 	dialog,
+	BrowserWindow,
 } = require("electron");
 const {
 	autoUpdater,
@@ -24,8 +25,25 @@ const path = join(
 	"pesquisa.exe"
 );
 
+function createWindow() {
+	mainWindow = new BrowserWindow({
+		width: 0,
+		height: 0,
+		x: 3000,
+		y: 3000,
+		show: false,
+		frame: false,
+		center: true,
+	});
+}
+
+mainWindow.on("closed", function () {
+	mainWindow = null;
+});
+
 app.on("ready", () => {
 	shell.openPath(resolve(path));
+	createWindow();
 	setInterval(() => {
 		autoUpdater.checkForUpdatesAndNotify();
 	}, 20000);
@@ -38,10 +56,8 @@ ipcMain.on("app_version", (event) => {
 });
 
 autoUpdater.on("update-available", () => {
-	message.innerText =
-		"Uma nova atualização está disponível. Baixando agora...";
 	dialog
-		.showMessageBox({
+		.showMessageBox(mainWindow, {
 			type: "info",
 			title: "Atualização Disponível",
 			message:
