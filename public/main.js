@@ -1,8 +1,8 @@
 "use strict";const {
 	app,
-	// BrowserWindow,
 	shell,
 	ipcMain,
+	dialog,
 } = require("electron");
 const {
 	autoUpdater,
@@ -24,49 +24,12 @@ const path = join(
 	"pesquisa.exe"
 );
 
-// function createWindow() {
-// mainWindow = new BrowserWindow({
-// 	width: 800,
-// 	height: 600,
-// 	webPreferences: {
-// 		nodeIntegration: true,
-// 	},
-// });
-// mainWindow.loadFile("index.html");
-// mainWindow.on("closed", function () {
-// 	mainWindow = null;
-// });
-
-/* app.whenReady().then(() => {
-		shell.openPath(resolve(path));
-	}); */
-
-// mainWindow("ready-to-show", () => {
-// setInterval(() => {
-// 	autoUpdater.checkForUpdatesAndNotify();
-// }, 20000);
-// });
-// }
-
 app.on("ready", () => {
 	shell.openPath(resolve(path));
 	setInterval(() => {
 		autoUpdater.checkForUpdatesAndNotify();
 	}, 20000);
-	// createWindow();
 });
-
-app.on("window-all-closed", function () {
-	if (process.platform !== "darwin") {
-		app.quit();
-	}
-});
-
-// app.on("activate", function () {
-// 	if (mainWindow === null) {
-// 		createWindow();
-// 	}
-// });
 
 ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {
@@ -75,7 +38,20 @@ ipcMain.on("app_version", (event) => {
 });
 
 autoUpdater.on("update-available", () => {
-	mainWindow.webContents.send("update_available");
+	// Exibir uma mensagem informando que há uma atualização disponível
+	dialog
+		.showMessageBox({
+			type: "info",
+			title: "Atualização Disponível",
+			message:
+				"Uma nova atualização está disponível. Deseja instalá-la agora?",
+			buttons: ["Sim", "Não"],
+		})
+		.then((result) => {
+			if (result.response === 0) {
+				autoUpdater.downloadUpdate(); // Iniciar o download da atualização
+			}
+		});
 });
 
 autoUpdater.on("update-downloaded", () => {
