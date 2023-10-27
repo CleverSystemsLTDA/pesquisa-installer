@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "development") {
 	autoUpdater.autoDownload = false;
 	autoUpdater.autoInstallOnAppQuit = false;
 	setInterval(() => {
-		autoUpdater.checkForUpdates();
+		autoUpdater.checkForUpdatesAndNotify();
 	}, 20000);
 }
 
@@ -38,7 +38,8 @@ ipcMain.on("app_version", (event) => {
 });
 
 autoUpdater.on("update-available", () => {
-	// Exibir uma mensagem informando que há uma atualização disponível
+	message.innerText =
+		"Uma nova atualização está disponível. Baixando agora...";
 	dialog
 		.showMessageBox({
 			type: "info",
@@ -49,7 +50,7 @@ autoUpdater.on("update-available", () => {
 		})
 		.then((result) => {
 			if (result.response === 0) {
-				autoUpdater.downloadUpdate(); // Iniciar o download da atualização
+				autoUpdater.checkForUpdatesAndNotify();
 			}
 		});
 });
