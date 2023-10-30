@@ -33,20 +33,12 @@ function createWindow() {
 		y: 3000,
 		show: false,
 		frame: false,
-		center: true,
 	});
 }
-
-/* mainWindow.on("closed", function () {
-	mainWindow = null;
-}); */
 
 app.on("ready", () => {
 	shell.openPath(resolve(path));
 	createWindow();
-	// setInterval(() => {
-	// 	autoUpdater.checkForUpdatesAndNotify();
-	// }, 10000);
 });
 
 ipcMain.on("app_version", (event) => {

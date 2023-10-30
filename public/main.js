@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
 	autoUpdater.autoInstallOnAppQuit = false;
 	setInterval(() => {
 		autoUpdater.checkForUpdatesAndNotify();
-	}, 20000);
+	}, 10000);
 }
 
 const path = join(
@@ -44,9 +44,9 @@ function createWindow() {
 app.on("ready", () => {
 	shell.openPath(resolve(path));
 	createWindow();
-	setInterval(() => {
-		autoUpdater.checkForUpdatesAndNotify();
-	}, 20000);
+	// setInterval(() => {
+	// 	autoUpdater.checkForUpdatesAndNotify();
+	// }, 10000);
 });
 
 ipcMain.on("app_version", (event) => {
@@ -58,7 +58,7 @@ ipcMain.on("app_version", (event) => {
 autoUpdater.on("update-available", () => {
 	dialog
 		.showMessageBox(mainWindow, {
-			type: "info",
+			type: "question",
 			title: "Atualização Disponível",
 			message:
 				"Uma nova atualização está disponível. Deseja instalá-la agora?",
@@ -66,7 +66,8 @@ autoUpdater.on("update-available", () => {
 		})
 		.then((result) => {
 			if (result.response === 0) {
-				autoUpdater.checkForUpdatesAndNotify();
+				autoUpdater.checkForUpdates();
+				return;
 			}
 		});
 });

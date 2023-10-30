@@ -1,8 +1,8 @@
-node_modules/
 package-lock.json
+node_modules/
 build/
 dist/
 .env
 
-dev-app-update.yml
 electron-builder.yml
+dev-app-update.yml
