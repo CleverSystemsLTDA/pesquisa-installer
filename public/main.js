@@ -14,40 +14,27 @@ let mainWindow;
 
 if (process.env.NODE_ENV === "development") {
 	autoUpdater.autoDownload = false;
-	autoUpdater.autoInstallOnAppQuit = false;
 	setInterval(() => {
-		autoUpdater.checkForUpdatesAndNotify();
+		autoUpdater.checkForUpdates();
 	}, 10000);
+	autoUpdater.autoInstallOnAppQuit = false;
 }
 
 const path = join(
 	process.resourcesPath,
-	"pesquisa.exe"
+	"s3client.exe"
 );
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
-		width: 0,
-		height: 0,
-		x: 3000,
-		y: 3000,
+		width: 800,
+		height: 600,
 		show: false,
-		frame: false,
-		center: true,
+		webPreferences: {
+			nodeIntegration: true,
+		},
 	});
 }
-
-/* mainWindow.on("closed", function () {
-	mainWindow = null;
-}); */
-
-app.on("ready", () => {
-	shell.openPath(resolve(path));
-	createWindow();
-	// setInterval(() => {
-	// 	autoUpdater.checkForUpdatesAndNotify();
-	// }, 10000);
-});
 
 ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {
@@ -55,27 +42,41 @@ ipcMain.on("app_version", (event) => {
 	});
 });
 
-autoUpdater.on("update-available", () => {
-	dialog
-		.showMessageBox(mainWindow, {
-			type: "question",
-			title: "Atualização Disponível",
-			message:
-				"Uma nova atualização está disponível. Deseja instalá-la agora?",
-			buttons: ["Sim", "Não"],
-		})
-		.then((result) => {
-			if (result.response === 0) {
-				autoUpdater.checkForUpdates();
-				return;
-			}
-		});
-});
+app.on("ready", () => {
+	autoUpdater.autoDownload = false;
+	autoUpdater.autoInstallOnAppQuit = false;
 
-autoUpdater.on("update-downloaded", () => {
-	mainWindow.webContents.send(
-		"update_downloaded"
-	);
+	shell.openPath(resolve(path));
+
+	autoUpdater.checkForUpdatesAndNotify();
+
+	autoUpdater.on("update-available", () => {
+		dialog
+			.showMessageBox(mainWindow, {
+				type: "question",
+				title: "Atualização Disponível",
+				message:
+					"Uma nova atualização está disponível. Deseja instalá-la agora?",
+				buttons: ["Sim", "Não"],
+			})
+			.then((result) => {
+				if (result.response === 0) {
+					autoUpdater.downloadUpdate();
+				}
+			});
+	});
+
+	autoUpdater.on("update-downloaded", () => {
+		dialog.showMessageBox(mainWindow, {
+			type: "info",
+			title: "Atualização baixada",
+			message:
+				"A atualização foi baixada. Reinicie a aplicação para aplicar as mudanças.",
+			buttons: ["OK"],
+		});
+	});
+
+	createWindow();
 });
 
 ipcMain.on("restart_app", () => {

@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
 
 const path = join(
 	process.resourcesPath,
-	"s3client.exe"
+	"pesquisa.exe"
 );
 
 function createWindow() {
