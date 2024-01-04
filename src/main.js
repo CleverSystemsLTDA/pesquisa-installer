@@ -39,7 +39,7 @@ function createWindow() {
 function showVersion() {
 	dialog.showMessageBox(mainWindow, {
 		type: "info",
-		title: "Versão do App",
+		title: "Versão do App Trouxa",
 		message:
 			`A versão do app é ${app.getVersion()}`,
 		buttons: ["OK"],
