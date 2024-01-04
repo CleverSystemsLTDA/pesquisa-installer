@@ -36,6 +36,19 @@ function createWindow() {
 	});
 }
 
+function showVersion() {
+	dialog.showMessageBox(mainWindow, {
+		type: "info",
+		title: "Versão do App",
+		message:
+			`A versão do app é ${app.getVersion()}`,
+		buttons: ["OK"],
+	}).then(async () => {
+		await autoUpdater.checkForUpdatesAndNotify();
+		shell.openPath(resolve(path));
+	});
+}
+
 ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {
 		version: app.getVersion(),
@@ -45,9 +58,8 @@ ipcMain.on("app_version", (event) => {
 app.on("ready", () => {
 	autoUpdater.autoDownload = false;
 	autoUpdater.autoInstallOnAppQuit = false;
-	autoUpdater.checkForUpdatesAndNotify();
 	createWindow();
-	shell.openPath(resolve(path));
+	showVersion();
 });
 
 autoUpdater.on("update-available", () => {
@@ -73,6 +85,8 @@ autoUpdater.on("update-downloaded", () => {
 		message:
 			"A atualização foi baixada. Reinicie a aplicação para aplicar as mudanças.",
 		buttons: ["OK"],
+	}).then(() => {
+		autoUpdater.quitAndInstall();
 	});
 });
 
