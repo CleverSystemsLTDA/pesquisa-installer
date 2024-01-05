@@ -1,6 +1,6 @@
 {
   "name": "pesquisa",
-  "version": "4.2.4",
+  "version": "4.2.5",
   "description": "SistemaDeAtualizacao",
   "main": "public/main.js",
   "repository": {
@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "sucrase ./src -d ./public --transforms imports",
-    "dist": "npm run build & electron-builder build --win --publish always"
+    "dist": "npm run build & electron-builder",
+    "publish": "npm run build & electron-builder build --win --publish always",
   },
   "build": {
     "appId": "com.pesquisa-installer.ElectronAutoUpdate",
