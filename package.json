@@ -22,7 +22,10 @@
     "files": [],
     "extraResources": {
       "from": "public/",
-      "to": "."
+      "to": ".",
+      "filter": [
+        "!main.js"
+      ]
     },
     "win": {
       "artifactName": "${productName}-${version}.${ext}",
