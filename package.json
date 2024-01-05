@@ -20,6 +20,7 @@
     "productName": "pesquisa",
     "asar": true,
     "files": [],
+    "publishAutoUpdate": true,
     "extraResources": {
       "from": "public/",
       "to": "."
