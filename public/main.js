@@ -44,16 +44,22 @@ function showVersion() {
 			`A versão do app é ${app.getVersion()}`,
 		buttons: ["OK"],
 	}).then(async () => {
-		await autoUpdater.checkForUpdatesAndNotify();
-		shell.openPath(resolve(path));
+		const resultUpdater = await autoUpdater.checkForUpdatesAndNotify();
+		dialog.showMessageBox(mainWindow, {
+			type: "info",
+			title: "Há versão?",
+			message:
+				`Resultado se há versão: ${JSON.stringify(resultUpdater)}`,
+			buttons: ["OK"],
+		});
 	});
 }
 
-ipcMain.on("app_version", (event) => {
+/* ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {
 		version: app.getVersion(),
 	});
-});
+}); */
 
 app.on("ready", () => {
 	autoUpdater.autoDownload = false;
@@ -75,6 +81,9 @@ autoUpdater.on("update-available", () => {
 			if (result.response === 0) {
 				autoUpdater.downloadUpdate();
 			}
+			if (result.response === 1) {
+				shell.openPath(resolve(path));
+			}
 		});
 });
 
@@ -86,10 +95,22 @@ autoUpdater.on("update-downloaded", () => {
 			"A atualização foi baixada. Reinicie a aplicação para aplicar as mudanças.",
 		buttons: ["OK"],
 	}).then(() => {
-		autoUpdater.quitAndInstall();
+		autoUpdater.quitAndInstall(true, true);
 	});
 });
 
-ipcMain.on("restart_app", () => {
-	autoUpdater.quitAndInstall();
+autoUpdater.on("error", (message) => {
+	dialog.showMessageBox(mainWindow, {
+		type: "error",
+		title: "Erro em att",
+		message:
+			`${message}`,
+		buttons: ["OK"],
+	})
 });
+
+/* ipcMain.on("restart_app", () => {
+	// autoUpdater.quitAndInstall();
+	autoUpdater.quitAndInstall(true, true);
+});
+	*/

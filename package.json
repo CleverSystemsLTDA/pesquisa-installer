@@ -1,6 +1,6 @@
 {
   "name": "pesquisa",
-  "version": "4.2.5",
+  "version": "4.2.7",
   "description": "SistemaDeAtualizacao",
   "main": "public/main.js",
   "repository": {
@@ -20,13 +20,12 @@
     "productName": "pesquisa",
     "asar": true,
     "files": [],
-    "publishAutoUpdate": true,
     "extraResources": {
       "from": "public/",
       "to": "."
     },
     "win": {
-      "artifactName": "${productName}.${ext}",
+      "artifactName": "${productName}-${version}.${ext}",
       "target": [
         {
           "target": "nsis",
@@ -43,6 +42,7 @@
       "uninstallerIcon": "infra/images/icon.ico",
       "uninstallDisplayName": "pesquisa",
       "oneClick": false,
+      "include": "build/installer.nsh",
       "allowToChangeInstallationDirectory": false
     }
   },

@@ -49,17 +49,17 @@ function showVersion() {
 			type: "info",
 			title: "Há versão?",
 			message:
-				`Resultado se há versão: ${resultUpdater}`,
+				`Resultado se há versão: ${JSON.stringify(resultUpdater)}`,
 			buttons: ["OK"],
 		});
 	});
 }
 
-ipcMain.on("app_version", (event) => {
+/* ipcMain.on("app_version", (event) => {
 	event.sender.send("app_version", {
 		version: app.getVersion(),
 	});
-});
+}); */
 
 app.on("ready", () => {
 	autoUpdater.autoDownload = false;
@@ -109,7 +109,8 @@ autoUpdater.on("error", (message) => {
 	})
 });
 
-ipcMain.on("restart_app", () => {
+/* ipcMain.on("restart_app", () => {
 	// autoUpdater.quitAndInstall();
 	autoUpdater.quitAndInstall(true, true);
 });
+	*/
