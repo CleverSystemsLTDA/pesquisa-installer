@@ -12,7 +12,7 @@
     "start": "electron .",
     "build": "sucrase ./src -d ./public --transforms imports",
     "dist": "npm run build & electron-builder",
-    "publish": "npm run build & electron-builder build --win --publish always",
+    "publish": "npm run build & electron-builder build --win --publish always"
   },
   "build": {
     "appId": "com.pesquisa-installer.ElectronAutoUpdate",
